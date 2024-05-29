@@ -1,3 +1,7 @@
 s_readline();
 s_string("TRUN ");
 s_string_variable("0");
+
+#generic_send_tcp <vulnserver ip address> <port number> <spiking script> 0 0
+#generic_send_tcp 192.168.100.215 9999 spiking.spk 0 0
+
