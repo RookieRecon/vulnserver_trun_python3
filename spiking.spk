@@ -1,4 +1,6 @@
 s_readline();
+
+#Command which we are targeting. In VulnServer --> TRUN command is vulnerable
 s_string("TRUN ");
 s_string_variable("0");
 
